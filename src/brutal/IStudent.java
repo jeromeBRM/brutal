@@ -1,5 +1,5 @@
 package brutal;
 
-public class IStudent {
+public interface IStudent {
 
 }

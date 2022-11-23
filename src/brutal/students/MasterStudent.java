@@ -1,5 +1,5 @@
 package brutal.students;
 
-public class MasterStudent {
+public class MasterStudent extends Student {
 
 }

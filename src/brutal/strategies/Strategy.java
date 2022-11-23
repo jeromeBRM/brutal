@@ -1,5 +1,7 @@
 package brutal.strategies;
 
-public class Strategy {
+import brutal.IStrategy;
+
+public abstract class Strategy implements IStrategy {
 
 }

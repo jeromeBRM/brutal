@@ -1,5 +1,5 @@
 package brutal.strategies;
 
-public class DefensiveStrategy {
+public class DefensiveStrategy extends Strategy {
 
 }

@@ -1,5 +1,5 @@
 package brutal;
 
-public class IStrategy {
+public interface IStrategy {
 
 }
