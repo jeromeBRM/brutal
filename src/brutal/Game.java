@@ -1,38 +1,46 @@
 package brutal;
+import brutal.states.StartState;
 
-import java.util.List;
+import java.util.*;
 
 public class Game implements IGame {
 
+	private static IGame game;
 	
+	private IState state;
+	private Set<Player> players;
+	private Player playerTurn;
+	private Set<Area> areas;
 	
 	public Game() {
-		// TODO Auto-generated constructor stub
+		this.initialize();
 	}
 
 	@Override
-	public void initializeGame() {
-		// TODO Auto-generated method stub
+	public void initialize() {
+		this.setState(new StartState());
 		
+		this.areas = new HashSet<Area>();
+		this.areas.add(new Area("Bibliothèque"));
+		this.areas.add(new Area("Bureau des étudiants"));
+		this.areas.add(new Area("Quartier administratif"));
+		this.areas.add(new Area("Halles industrielles"));
+		this.areas.add(new Area("Halle sportive"));
 	}
 
 	@Override
 	public void setState(IState state) {
-		// TODO Auto-generated method stub
-		
+		this.state = state;
 	}
 
 	@Override
 	public void createPlayer(Program program) {
-		// TODO Auto-generated method stub
-		
+		this.players.add(new Player(program));
 	}
 
 	@Override
-	public void createStudent(Player player, int strength, int dexterity, int resilience, int constitution,
-			int initiative) {
-		// TODO Auto-generated method stub
-		
+	public void createStudent(Player player, int strength, int dexterity, int resilience, int constitution, int initiative) {
+
 	}
 
 	@Override
@@ -66,15 +74,13 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public List<Player> getPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Player> getPlayers() {
+		return this.players;
 	}
 
 	@Override
 	public Player getPlayerTurn() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.playerTurn;
 	}
 
 	@Override
@@ -90,15 +96,21 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public List<Area> getAreas() {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Area> getAreas() {
+		return this.areas;
 	}
 
 	@Override
 	public Area getAreaByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Area area = null;
+
+		for (Area a : this.getAreas()) {
+			if (a.getName() == name) {
+				area = a;
+			}
+		}
+		
+		return area;
 	}
 
 	@Override
@@ -112,5 +124,11 @@ public class Game implements IGame {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public static synchronized IGame getInstance() {
+		if (Game.game == null) {
+			Game.game = new Game();
+		}
+		return Game.game;
+	}
 }

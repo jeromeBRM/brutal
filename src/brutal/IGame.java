@@ -1,9 +1,9 @@
 package brutal;
 
-import java.util.List;
+import java.util.*;
 
 public interface IGame {
-	public void initializeGame();
+	public void initialize();
 	
 	public void setState(IState state);
 	
@@ -21,7 +21,7 @@ public interface IGame {
 	
 	public void placeReservist(IStudent reservist, Area area);
 	
-	public List<Player> getPlayers();
+	public Set<Player> getPlayers();
 	
 	public Player getPlayerTurn();
 	
@@ -29,7 +29,7 @@ public interface IGame {
 	
 	public boolean isStudentBelongingToPlayer(IStudent student, Player player);
 	
-	public List<Area> getAreas();
+	public Set<Area> getAreas();
 	
 	public Area getAreaByName(String name);
 	
