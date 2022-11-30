@@ -7,52 +7,62 @@ import brutal.IStudent;
 
 public class Student implements IStudent {
 
+	private int ects;
+	private int dexterity;
+	private int strength;
+	private int resilience;
+	private int constitution;
+	private int initiative;
+	private IStrategy strategy;
+	
+	public Student() {
+		this.setEcts(60);
+		this.setStrength(0);
+	}
+	
 	@Override
 	public void useStrategy(Area area, IGame game) {
-		// TODO Auto-generated method stub
-		
+		this.getStrategy().use(this, area, game);
+	}
+	
+	@Override
+	public void setEcts(int ects) {
+		this.ects = ects;
 	}
 
 	@Override
 	public void setStrategy(IStrategy strategy) {
-		// TODO Auto-generated method stub
-		
+		this.strategy = strategy;
 	}
 
 	@Override
 	public void setStrength(int strength) {
-		// TODO Auto-generated method stub
-		
+		this.strength = strength;
 	}
 
 	@Override
 	public void setDexterity(int dexterity) {
-		// TODO Auto-generated method stub
-		
+		this.dexterity = dexterity;
 	}
 
 	@Override
 	public void setResilience(int resilience) {
-		// TODO Auto-generated method stub
-		
+		this.resilience = resilience;
 	}
 
 	@Override
 	public void setConstitution(int constitution) {
-		// TODO Auto-generated method stub
-		
+		this.constitution = constitution;
 	}
 
 	@Override
 	public void setInitiative(int initiative) {
-		// TODO Auto-generated method stub
-		
+		this.initiative = initiative;
 	}
 
 	@Override
 	public void heal(int ects) {
-		// TODO Auto-generated method stub
-		
+		this.setEcts(this.getEcts() + ects);
 	}
 
 	@Override
@@ -63,38 +73,36 @@ public class Student implements IStudent {
 
 	@Override
 	public int getEcts() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.ects;
 	}
 
 	@Override
 	public int getStrength() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.strength;
 	}
 
 	@Override
 	public int getDexterity() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.dexterity;
 	}
 
 	@Override
 	public int getResilience() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.resilience;
 	}
 
 	@Override
 	public int getConstitution() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.constitution;
 	}
 
 	@Override
 	public int getInitiative() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.initiative;
 	}
 
+	@Override
+	public IStrategy getStrategy() {
+		return this.strategy;
+	}
 }

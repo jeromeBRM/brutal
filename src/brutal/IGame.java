@@ -21,6 +21,8 @@ public interface IGame {
 	
 	public void placeReservist(IStudent reservist, Area area);
 	
+	public IState getState();
+	
 	public Set<Player> getPlayers();
 	
 	public Player getPlayerTurn();
@@ -36,4 +38,6 @@ public interface IGame {
 	public Player getAreaOwner(Area area);
 	
 	public Player getWinner();
+
+	public void setPlayerTurn(Player player);
 }

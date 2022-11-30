@@ -5,6 +5,8 @@ public interface IStudent {
 	
 	public void setStrategy(IStrategy strategy);
 	
+	public void setEcts(int ects);
+	
 	public void setStrength(int strength);
 	
 	public void setDexterity(int dexterity);
@@ -30,4 +32,6 @@ public interface IStudent {
 	public int getConstitution();
 	
 	public int getInitiative();
+	
+	public IStrategy getStrategy();
 }

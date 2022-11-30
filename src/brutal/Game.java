@@ -1,5 +1,5 @@
 package brutal;
-import brutal.states.StartState;
+import brutal.states.*;
 
 import java.util.*;
 
@@ -18,7 +18,9 @@ public class Game implements IGame {
 
 	@Override
 	public void initialize() {
-		this.setState(new StartState());
+		this.setState(new StartState(this));
+		
+		this.players = new HashSet<Player>();
 		
 		this.areas = new HashSet<Area>();
 		this.areas.add(new Area("Bibliothèque"));
@@ -35,7 +37,13 @@ public class Game implements IGame {
 
 	@Override
 	public void createPlayer(Program program) {
+		for(Player player : this.getPlayers()) {
+			if (player.getProgram() == program)
+				return;
+		}
 		this.players.add(new Player(program));
+		
+		this.getState().updateGameState(Game.getInstance());
 	}
 
 	@Override
@@ -71,6 +79,11 @@ public class Game implements IGame {
 	public void placeReservist(IStudent reservist, Area area) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public IState getState() {
+		return this.state;
 	}
 
 	@Override
@@ -130,5 +143,10 @@ public class Game implements IGame {
 			Game.game = new Game();
 		}
 		return Game.game;
+	}
+
+	@Override
+	public void setPlayerTurn(Player player) {
+		this.playerTurn = player;
 	}
 }

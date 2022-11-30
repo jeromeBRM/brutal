@@ -1,17 +1,12 @@
 package brutal.states;
 
 import brutal.IGame;
+import brutal.IState;
 
 public class EndState extends State {
 
-	public EndState() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void updateGameState(IGame game) {
-		// TODO Auto-generated method stub
-		
+	public EndState(IGame game) {
+		super(game);
 	}
 
 	@Override
@@ -24,6 +19,12 @@ public class EndState extends State {
 	public boolean commandIsValid(String command) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	protected IState getNextState(IGame game) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

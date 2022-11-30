@@ -1,17 +1,12 @@
 package brutal.states;
 
 import brutal.IGame;
+import brutal.IState;
 
 public class AllocationState extends State {
 
-	public AllocationState() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void updateGameState(IGame game) {
-		// TODO Auto-generated method stub
-		
+	public AllocationState(IGame game) {
+		super(game);
 	}
 
 	@Override
@@ -26,4 +21,14 @@ public class AllocationState extends State {
 		return false;
 	}
 
+	@Override
+	protected IState getNextState(IGame game) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return "allocation state";
+	}
 }

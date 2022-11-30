@@ -2,8 +2,7 @@ package brutal;
 
 import java.util.*;
 
-import brutal.comparators.SortStudentsByEcts;
-import brutal.comparators.SortStudentsByInitiative;
+import brutal.comparators.*;
 
 public class Area {
 	private String name;
