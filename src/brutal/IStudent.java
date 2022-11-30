@@ -1,6 +1,14 @@
 package brutal;
 
 public interface IStudent {
+	public String getId();
+	
+	public void setId(int id);
+	
+	public void setAttributes(int strength, int dexterity, int resilience, int constitution, int initiative);
+	
+	public void addAttributes(int strength, int dexterity, int resilience, int constitution, int initiative);
+	
 	public void useStrategy(Area area, IGame game);
 	
 	public void setStrategy(IStrategy strategy);
@@ -34,4 +42,6 @@ public interface IStudent {
 	public int getInitiative();
 	
 	public IStrategy getStrategy();
+	
+	public int getTotalAttributes();
 }

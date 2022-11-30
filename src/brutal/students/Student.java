@@ -7,6 +7,9 @@ import brutal.IStudent;
 
 public class Student implements IStudent {
 
+	private int id;
+	private static int studentCount;
+	
 	private int ects;
 	private int dexterity;
 	private int strength;
@@ -16,8 +19,33 @@ public class Student implements IStudent {
 	private IStrategy strategy;
 	
 	public Student() {
-		this.setEcts(60);
-		this.setStrength(0);
+		this.setId(Student.studentCount);
+		
+		this.setEcts(30);
+		this.setAttributes(0, 0, 0, 0, 0);
+	}
+	
+	public String getId() {
+		return "ETU" + this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+		Student.studentCount++;
+	}
+
+	@Override
+	public void setAttributes(int strength, int dexterity, int resilience, int constitution, int initiative) {
+		this.setStrength(strength);
+		this.setDexterity(dexterity);
+		this.setResilience(resilience);
+		this.setConstitution(constitution);
+		this.setInitiative(initiative);
+	}
+	
+	@Override
+	public void addAttributes(int strength, int dexterity, int resilience, int constitution, int initiative) {
+		this.setAttributes(this.getStrength() + strength, this.getDexterity() + dexterity, this.getResilience() + resilience, this.getConstitution() + constitution, this.getInitiative() + initiative);
 	}
 	
 	@Override
@@ -104,5 +132,10 @@ public class Student implements IStudent {
 	@Override
 	public IStrategy getStrategy() {
 		return this.strategy;
+	}
+
+	@Override
+	public int getTotalAttributes() {
+		return this.strength + this.dexterity + this.resilience + this.constitution + this.initiative;
 	}
 }

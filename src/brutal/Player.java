@@ -1,5 +1,6 @@
 package brutal;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -24,6 +25,17 @@ public class Player {
 	public Program getProgram() {
 		return this.program;
 	}
+	
+	public IStudent getStudentById(String id) {
+		IStudent student = null;
+		
+		for (IStudent s : this.getStudents()) {
+			if (s.getId().equals(id)) {
+				student = s;
+			}
+		}
+		return student;
+	}
 
 	public LinkedList<IStudent> getStudents() {
 		return this.students;
@@ -43,8 +55,18 @@ public class Player {
 		return null;
 	}
 	
+	public void addAttributeToStudent() {
+		
+	}
+	
 	public int getTotalSpentAttributePoints() {
 		int total = 0;
+		
+		for (Iterator iterator = this.getStudents().iterator(); iterator.hasNext();) {
+			IStudent student = (IStudent) iterator.next();
+			total += student.getTotalAttributes();
+		}
+		System.out.println(total);
 		return total;
 	}
 }

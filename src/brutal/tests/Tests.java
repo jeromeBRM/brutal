@@ -45,5 +45,16 @@ class Tests {
 		for (Player player : Game.getInstance().getPlayers()) {
 			assertEquals(player.getStudents().size(), 20);	
 		}
+
+		// tests if student ETU0 is created and belongs to current player
+		assertEquals(Game.getInstance().getPlayerTurn().getStudentById("ETU0").getId(), "ETU0");
+		
+		// allocate points to students 
+		for (IStudent student : Game.getInstance().getPlayerTurn().getStudents()) {
+			student.addAttributes(4, 4, 4, 4, 4);
+		}
+		
+		// tests if total spent points are correctly counted
+		assertEquals(Game.getInstance().getPlayerTurn().getTotalSpentAttributePoints(), 400);
 	}
 }
