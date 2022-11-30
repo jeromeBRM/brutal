@@ -17,6 +17,9 @@ public class Student implements IStudent {
 	private int constitution;
 	private int initiative;
 	private IStrategy strategy;
+
+	private static final int MAX_ATTRIBUTE = 10;
+	private static final int MAX_HEALTH_ATTRIBUTE = 30;
 	
 	public Student() {
 		this.setId(Student.studentCount);
@@ -25,10 +28,12 @@ public class Student implements IStudent {
 		this.setAttributes(0, 0, 0, 0, 0);
 	}
 	
+	@Override
 	public String getId() {
 		return "ETU" + this.id;
 	}
-	
+
+	@Override
 	public void setId(int id) {
 		this.id = id;
 		Student.studentCount++;
@@ -55,7 +60,9 @@ public class Student implements IStudent {
 	
 	@Override
 	public void setEcts(int ects) {
-		this.ects = ects;
+		if (ects >= Student.MAX_HEALTH_ATTRIBUTE) {
+			this.ects = Student.MAX_HEALTH_ATTRIBUTE;		
+		}
 	}
 
 	@Override
@@ -66,26 +73,41 @@ public class Student implements IStudent {
 	@Override
 	public void setStrength(int strength) {
 		this.strength = strength;
+		if (strength >= Student.MAX_ATTRIBUTE) {
+			this.strength = Student.MAX_ATTRIBUTE;
+		}
 	}
 
 	@Override
 	public void setDexterity(int dexterity) {
 		this.dexterity = dexterity;
+		if (dexterity >= Student.MAX_ATTRIBUTE) {
+			this.dexterity = Student.MAX_ATTRIBUTE;	
+		}
 	}
 
 	@Override
 	public void setResilience(int resilience) {
 		this.resilience = resilience;
+		if (resilience >= Student.MAX_ATTRIBUTE) {
+			this.resilience = Student.MAX_ATTRIBUTE;	
+		}
 	}
 
 	@Override
 	public void setConstitution(int constitution) {
 		this.constitution = constitution;
+		if (constitution >= Student.MAX_HEALTH_ATTRIBUTE) {
+			this.constitution = Student.MAX_HEALTH_ATTRIBUTE;	
+		}
 	}
 
 	@Override
 	public void setInitiative(int initiative) {
 		this.initiative = initiative;
+		if (initiative >= Student.MAX_ATTRIBUTE) {
+			this.initiative = Student.MAX_ATTRIBUTE;	
+		}
 	}
 
 	@Override
@@ -95,8 +117,7 @@ public class Student implements IStudent {
 
 	@Override
 	public void damage(int ects) {
-		// TODO Auto-generated method stub
-		
+		this.setEcts(this.getEcts() - ects);
 	}
 
 	@Override
@@ -137,5 +158,21 @@ public class Student implements IStudent {
 	@Override
 	public int getTotalAttributes() {
 		return this.strength + this.dexterity + this.resilience + this.constitution + this.initiative;
+	}
+
+	@Override
+	public IStudent setElite() {
+		IStudent student = new EliteStudent();
+		student.setId(this.id);
+		student.setAttributes(this.strength, this.dexterity, this.resilience, this.constitution, this.initiative);
+		return student;
+	}
+	
+	@Override
+	public IStudent setMaster() {
+		IStudent student = new MasterStudent();
+		student.setId(this.id);
+		student.setAttributes(this.strength, this.dexterity, this.resilience, this.constitution, this.initiative);
+		return student;
 	}
 }

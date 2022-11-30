@@ -10,15 +10,9 @@ public class AllocationState extends State {
 	}
 
 	@Override
-	public void executeCommandLine(String command, IGame game) {
+	public void executeCommandLine(String[] tokens, IGame game) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public boolean commandIsValid(String command) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

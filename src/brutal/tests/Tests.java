@@ -12,49 +12,84 @@ class Tests {
 	@Test
 	void gameTest() {
 		
+		IGame game = Game.getInstance();
+		
 		/*
 		 * start state tests
 		 */
 		
 		// tests if game is correctly initialized to default state
-		assertTrue(Game.getInstance().getState() instanceof StartState);
+		assertTrue(game.getState() instanceof StartState);
 		
 		// tests if areas are correctly set
-		assertTrue(Game.getInstance().getAreas().size() == 5);
-		assertTrue(Game.getInstance().getAreaByName("Bibliothèque") != null);
+		assertTrue(game.getAreas().size() == 5);
+		assertTrue(game.getAreaByName("Bibliothèque") != null);
 
 		// creates players
-		Game.getInstance().createPlayer(Program.ISI);
-		Game.getInstance().createPlayer(Program.RT);
+		game.createPlayer(Program.ISI);
+		game.createPlayer(Program.RT);
 	
 		// tests if program cannot be created twice
-		Game.getInstance().createPlayer(Program.ISI);
-		assertFalse(Game.getInstance().getPlayers().size() == 3);
+		game.createPlayer(Program.ISI);
+		assertFalse(game.getPlayers().size() == 3);
 		
 		/*
 		 * setup state tests
 		 */
 		
 		// tests if game state updated to setup state
-		assertTrue(Game.getInstance().getState() instanceof SetupState);
+		assertTrue(game.getState() instanceof SetupState);
 		
 		// tests if player's turn is first player
-		assertEquals(Game.getInstance().getPlayerTurn().getProgram(), Program.ISI);
+		assertEquals(game.getPlayerTurn().getProgram(), Program.ISI);
 		
 		// tests if students are correctly created
-		for (Player player : Game.getInstance().getPlayers()) {
+		for (Player player : game.getPlayers()) {
 			assertEquals(player.getStudents().size(), 20);	
 		}
 
 		// tests if student ETU0 is created and belongs to current player
-		assertEquals(Game.getInstance().getPlayerTurn().getStudentById("ETU0").getId(), "ETU0");
+		assertEquals(game.getPlayerTurn().getStudentById("ETU0", game.getPlayerTurn().getAllStudents()).getId(), "ETU0");
 		
 		// allocate points to students 
-		for (IStudent student : Game.getInstance().getPlayerTurn().getStudents()) {
-			student.addAttributes(4, 4, 4, 4, 4);
+		for (IStudent student : game.getPlayerTurn().getStudents()) {
+			game.getState().inputCommand("points " + student.getId() + " 4 4 4 4 4", game);
 		}
 		
-		// tests if total spent points are correctly counted
-		assertEquals(Game.getInstance().getPlayerTurn().getTotalSpentAttributePoints(), 400);
+		// tests if total spent points are correctly registered
+		assertEquals(game.getPlayerTurn().getTotalSpentAttributePoints(), 400);
+		
+		// tests if cannot allocate more than 400 points
+		game.getState().inputCommand("points ETU0 1 1 1 1 1", game);
+		assertEquals(game.getPlayerTurn().getTotalSpentAttributePoints(), 400);
+		
+		// tests if cannot add same student as reservist twice
+		assertEquals(game.getPlayerTurn().getReservists().size(), 0);
+		game.getState().inputCommand("reservist ETU0", game);
+		game.getState().inputCommand("reservist ETU0", game);
+		assertEquals(game.getPlayerTurn().getStudents().size(), 19);
+		assertEquals(game.getPlayerTurn().getReservists().size(), 1);
+		
+		// tests if cannot add more than 5 reservists
+		game.getState().inputCommand("reservist ETU1", game);
+		game.getState().inputCommand("reservist ETU2", game);
+		game.getState().inputCommand("reservist ETU3", game);
+		game.getState().inputCommand("reservist ETU4", game);
+		game.getState().inputCommand("reservist ETU5", game);
+		assertEquals(game.getPlayerTurn().getReservists().size(), 5);
+		assertEquals(game.getPlayerTurn().getStudents().size(), 15);
+
+		// tests if cannot set same student as elite twice
+		assertEquals(game.getPlayerTurn().getEliteStudents().size(), 0);
+		game.getState().inputCommand("elite ETU1", game);
+		game.getState().inputCommand("elite ETU1", game);
+		assertEquals(game.getPlayerTurn().getEliteStudents().size(), 1);
+		
+		// tests if cannot add more than 4 elite students
+		game.getState().inputCommand("elite ETU2", game);
+		game.getState().inputCommand("elite ETU6", game);
+		game.getState().inputCommand("elite ETU7", game);
+		game.getState().inputCommand("elite ETU8", game);
+		assertEquals(game.getPlayerTurn().getEliteStudents().size(), 4);
 	}
 }

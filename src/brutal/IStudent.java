@@ -44,4 +44,8 @@ public interface IStudent {
 	public IStrategy getStrategy();
 	
 	public int getTotalAttributes();
+	
+	public IStudent setElite();
+	
+	public IStudent setMaster();
 }

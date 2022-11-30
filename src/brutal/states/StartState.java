@@ -12,15 +12,8 @@ public class StartState extends State {
 	}
 
 	@Override
-	public void executeCommandLine(String command, IGame game) {
-		// TODO Auto-generated method stub
+	public void executeCommandLine(String[] tokens, IGame game) {
 		
-	}
-
-	@Override
-	public boolean commandIsValid(String command) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

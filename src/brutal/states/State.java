@@ -13,6 +13,17 @@ public abstract class State implements IState {
 	public void updateGameState(IGame game) {
 		game.setState(this.getNextState(game));
 	}
+	
+	@Override
+	public void inputCommand(String command, IGame game) {
+		try {
+			String[] tokens = command.split(" ");
+			this.executeCommandLine(tokens, game);
+		} catch (Exception e) {
+			System.out.println("Incorrect input!");
+			e.printStackTrace();
+		}
+	}
 
 	protected abstract IState getNextState(IGame game);
 }
