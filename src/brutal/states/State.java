@@ -19,6 +19,7 @@ public abstract class State implements IState {
 		try {
 			String[] tokens = command.split(" ");
 			this.executeCommandLine(tokens, game);
+			this.updateGameState(game);
 		} catch (Exception e) {
 			System.out.println("Incorrect input!");
 			e.printStackTrace();

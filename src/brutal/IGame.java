@@ -23,7 +23,7 @@ public interface IGame {
 	
 	public IState getState();
 	
-	public Set<Player> getPlayers();
+	public List<Player> getPlayers();
 	
 	public Player getPlayerTurn();
 	

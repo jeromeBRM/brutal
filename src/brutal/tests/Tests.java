@@ -88,8 +88,37 @@ class Tests {
 		// tests if cannot add more than 4 elite students
 		game.getState().inputCommand("elite ETU2", game);
 		game.getState().inputCommand("elite ETU6", game);
+		
+		// tests elite student attributes boost
+		IStudent elite = game.getPlayerTurn().getStudentById("ETU2", game.getPlayerTurn().getAllStudents());
+		assertEquals(elite.getEcts(), 30);
+		assertEquals(elite.getDexterity(), 5);
+		assertEquals(elite.getDexterity(), 5);
+		assertEquals(elite.getResilience(), 5);
+		assertEquals(elite.getConstitution(), 9);
+		assertEquals(elite.getInitiative(), 5);
+		
+		Player player1 = game.getPlayerTurn();
+		
+		// tests if cannot set same student as master twice
+		assertEquals(game.getPlayerTurn().getMasterStudents().size(), 0);
+		game.getState().inputCommand("master ETU8", game);
+		game.getState().inputCommand("master ETU8", game);
+		assertEquals(game.getPlayerTurn().getMasterStudents().size(), 1);
+		
+		// tests mestaer student attributes boost
+		IStudent master = game.getPlayerTurn().getStudentById("ETU8", game.getPlayerTurn().getAllStudents());
+		assertEquals(master.getEcts(), 30);
+		assertEquals(master.getDexterity(), 6);
+		assertEquals(master.getDexterity(), 6);
+		assertEquals(master.getResilience(), 6);
+		assertEquals(master.getConstitution(), 14);
+		assertEquals(master.getInitiative(), 6);
+		
 		game.getState().inputCommand("elite ETU7", game);
 		game.getState().inputCommand("elite ETU8", game);
-		assertEquals(game.getPlayerTurn().getEliteStudents().size(), 4);
+		
+		// tests if player turn switched
+		assertNotEquals(game.getPlayerTurn(), player1);
 	}
 }

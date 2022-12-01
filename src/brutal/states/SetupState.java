@@ -28,6 +28,9 @@ public class SetupState extends State {
 			case "elite":
 				this.setEliteStudent(game, tokens[1]);
 				break;
+			case "master":
+				this.setMasterStudent(game, tokens[1]);
+				break;
 		}
 	}
 	
@@ -73,7 +76,7 @@ public class SetupState extends State {
 			if (!this.playerIsSetup(player)) {
 				return game.getState();
 			}
-		}	
+		}
 		return new AllocationState(game);
 	}
 	

@@ -8,7 +8,7 @@ public class Game implements IGame {
 	private static IGame game;
 	
 	private IState state;
-	private Set<Player> players;
+	private List<Player> players;
 	private Player playerTurn;
 	private Set<Area> areas;
 	
@@ -20,7 +20,7 @@ public class Game implements IGame {
 	public void initialize() {
 		this.setState(new StartState(this));
 		
-		this.players = new HashSet<Player>();
+		this.players = new LinkedList<Player>();
 		
 		this.areas = new HashSet<Area>();
 		this.areas.add(new Area("Bibliothèque"));
@@ -87,19 +87,18 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public Set<Player> getPlayers() {
+	public List<Player> getPlayers() {
 		return this.players;
 	}
 
 	@Override
 	public Player getPlayerTurn() {
-		return this.playerTurn;
+		return Game.getInstance().getPlayers().get(0);
 	}
 
 	@Override
 	public void switchPlayerTurn() {
-		// TODO Auto-generated method stub
-		
+		Collections.rotate(Game.getInstance().getPlayers(), 1);
 	}
 
 	@Override

@@ -123,7 +123,7 @@ public class Player {
 	public int getTotalSpentAttributePoints() {
 		int total = 0;
 		
-		for (Iterator<IStudent> iterator = this.getStudents().iterator(); iterator.hasNext();) {
+		for (Iterator<IStudent> iterator = this.getAllStudents().iterator(); iterator.hasNext();) {
 			IStudent student = (IStudent) iterator.next();
 			total += student.getTotalAttributes();
 		}
