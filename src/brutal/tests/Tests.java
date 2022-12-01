@@ -120,5 +120,27 @@ class Tests {
 		
 		// tests if player turn switched
 		assertNotEquals(game.getPlayerTurn(), player1);
+		
+		for (IStudent student : game.getPlayerTurn().getStudents()) {
+			game.getState().inputCommand("points " + student.getId() + " 4 4 4 4 4", game);
+		}
+		
+		game.getState().inputCommand("reservist ETU20", game);
+		game.getState().inputCommand("reservist ETU21", game);
+		game.getState().inputCommand("reservist ETU22", game);
+		game.getState().inputCommand("reservist ETU23", game);
+		game.getState().inputCommand("reservist ETU24", game);
+		game.getState().inputCommand("elite ETU20", game);
+		game.getState().inputCommand("elite ETU21", game);
+		game.getState().inputCommand("elite ETU22", game);
+		game.getState().inputCommand("elite ETU23", game);
+		game.getState().inputCommand("master ETU24", game);
+		
+		/*
+		 * allocation state tests
+		 */
+		
+		// tests if game state updated to allocation state
+		assertTrue(game.getState() instanceof AllocationState);
 	}
 }
