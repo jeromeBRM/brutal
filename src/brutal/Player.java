@@ -2,6 +2,9 @@ package brutal;
 
 import java.util.*;
 
+import brutal.strategies.DefensiveStrategy;
+import brutal.strategies.OffensiveStrategy;
+import brutal.strategies.RandomStrategy;
 import brutal.students.*;
 
 public class Player {
@@ -128,5 +131,24 @@ public class Player {
 			total += student.getTotalAttributes();
 		}
 		return total;
+	}
+
+	public void setStrategyToStudent(String id, String strat) {
+		IStrategy strategy;
+		
+		switch (strat) {
+			case "offensive":
+				strategy = new OffensiveStrategy();
+				break;
+			case "defensive":
+				strategy = new DefensiveStrategy();
+				break;
+			case "random":
+				strategy = new RandomStrategy();
+				break;
+			default :
+				strategy = new RandomStrategy();
+		}
+		this.getStudentById(id, this.getAllStudents()).setStrategy(strategy);
 	}
 }

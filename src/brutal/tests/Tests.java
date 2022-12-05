@@ -45,15 +45,16 @@ class Tests {
 		
 		// tests if students are correctly created
 		for (Player player : game.getPlayers()) {
-			assertEquals(player.getStudents().size(), 20);	
+			assertEquals(player.getAllStudents().size(), 20);	
 		}
 
 		// tests if student ETU0 is created and belongs to current player
 		assertEquals(game.getPlayerTurn().getStudentById("ETU0", game.getPlayerTurn().getAllStudents()).getId(), "ETU0");
 		
 		// allocate points to students 
-		for (IStudent student : game.getPlayerTurn().getStudents()) {
+		for (IStudent student : game.getPlayerTurn().getAllStudents()) {
 			game.getState().inputCommand("points " + student.getId() + " 4 4 4 4 4", game);
+			game.getState().inputCommand("strategy " + student.getId() + " random", game);
 		}
 		
 		// tests if total spent points are correctly registered
@@ -106,7 +107,7 @@ class Tests {
 		game.getState().inputCommand("master ETU8", game);
 		assertEquals(game.getPlayerTurn().getMasterStudents().size(), 1);
 		
-		// tests mestaer student attributes boost
+		// tests master student attributes boost
 		IStudent master = game.getPlayerTurn().getStudentById("ETU8", game.getPlayerTurn().getAllStudents());
 		assertEquals(master.getEcts(), 30);
 		assertEquals(master.getDexterity(), 6);
@@ -123,6 +124,7 @@ class Tests {
 		
 		for (IStudent student : game.getPlayerTurn().getStudents()) {
 			game.getState().inputCommand("points " + student.getId() + " 4 4 4 4 4", game);
+			game.getState().inputCommand("strategy " + student.getId() + " random", game);
 		}
 		
 		game.getState().inputCommand("reservist ETU20", game);
@@ -142,5 +144,7 @@ class Tests {
 		
 		// tests if game state updated to allocation state
 		assertTrue(game.getState() instanceof AllocationState);
+		
+		
 	}
 }

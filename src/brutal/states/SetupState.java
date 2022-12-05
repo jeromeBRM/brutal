@@ -2,6 +2,7 @@ package brutal.states;
 
 import brutal.IGame;
 import brutal.IState;
+import brutal.IStudent;
 import brutal.Player;
 
 public class SetupState extends State {
@@ -30,6 +31,9 @@ public class SetupState extends State {
 				break;
 			case "master":
 				this.setMasterStudent(game, tokens[1]);
+				break;
+			case "strategy":
+				this.setStrategyToStudent(game, tokens[1], tokens[2]);
 				break;
 		}
 	}
@@ -60,6 +64,12 @@ public class SetupState extends State {
 		}
 	}
 	
+	private void setStrategyToStudent(IGame game, String id, String strat) {
+		if (!this.allStudentsHaveStrategies(game.getPlayerTurn())) {
+			game.getPlayerTurn().setStrategyToStudent(id, strat);
+		}
+	}
+	
 	@Override
 	public void updateGameState(IGame game) {
 		super.updateGameState(game);
@@ -85,8 +95,18 @@ public class SetupState extends State {
 			player.getTotalSpentAttributePoints() == MAX_POINTS_TO_ALLOCATE &&
 			player.getReservists().size() == MAX_SELECTED_RESERVISTS &&
 			player.getEliteStudents().size() == MAX_SELECTED_ELITE_STUDENTS &&
-			player.getMasterStudents().size() == MAX_SELECTED_MASTER_STUDENTS
+			player.getMasterStudents().size() == MAX_SELECTED_MASTER_STUDENTS &&
+			this.allStudentsHaveStrategies(player)
 		);
+	}
+	
+	private boolean allStudentsHaveStrategies(Player player) {
+		for (IStudent student : player.getAllStudents()) {
+			if (student.getStrategy() == null) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override

@@ -23,7 +23,7 @@ public class Student implements IStudent {
 	
 	public Student() {
 		this.setId(Student.studentCount);
-		
+		this.strategy = null;
 		this.setEcts(30);
 		this.setAttributes(0, 0, 0, 0, 0);
 	}
@@ -165,6 +165,7 @@ public class Student implements IStudent {
 		IStudent student = new EliteStudent();
 		student.setId(this.id);
 		student.setAttributes(this.strength, this.dexterity, this.resilience, this.constitution, this.initiative);
+		student.setStrategy(this.strategy);
 		return student;
 	}
 	
@@ -173,6 +174,7 @@ public class Student implements IStudent {
 		IStudent student = new MasterStudent();
 		student.setId(this.id);
 		student.setAttributes(this.strength, this.dexterity, this.resilience, this.constitution, this.initiative);
+		student.setStrategy(this.strategy);
 		return student;
 	}
 }
