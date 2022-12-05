@@ -20,4 +20,9 @@ public class BattleState extends State {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "battle state";
+	}
 }

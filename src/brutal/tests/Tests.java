@@ -122,6 +122,8 @@ class Tests {
 		// tests if player turn switched
 		assertNotEquals(game.getPlayerTurn(), player1);
 		
+		Player player2 = game.getPlayerTurn();
+		
 		for (IStudent student : game.getPlayerTurn().getStudents()) {
 			game.getState().inputCommand("points " + student.getId() + " 4 4 4 4 4", game);
 			game.getState().inputCommand("strategy " + student.getId() + " random", game);
@@ -144,7 +146,42 @@ class Tests {
 		
 		// tests if game state updated to allocation state
 		assertTrue(game.getState() instanceof AllocationState);
+
+		game.getState().inputCommand("place ETU0 BBL", game);
+		game.getState().inputCommand("place ETU6 BBL", game);
 		
+		// tests if cannot place reservist on area
+		assertEquals(game.getAreaById("BBL").getOccupyingStudents().get(0), game.getPlayerTurn().getStudentById("ETU6", game.getPlayerTurn().getAllStudents()));
+
+		// tests if game state did not update to battle state
+		assertNotEquals(game.getPlayerTurn(), player2);
 		
+		for (IStudent student : game.getPlayerTurn().getStudents()) {
+			game.getState().inputCommand("place " + student.getId() + " BBL", game);
+		}
+		
+		// tests if all students are on "BBL" area
+		assertEquals(game.getAreaById("BBL").getOccupyingStudents().size(), 15);
+
+		for (int i = 0; i < 5; i++) {
+			game.getState().inputCommand("place " + game.getPlayerTurn().getStudents().get(i).getId() + " " + game.getAreas().get(i).getId(), game);
+		}
+		
+		// tests if students were moved from "BBL" area
+		assertEquals(game.getAreaById("BBL").getOccupyingStudents().size(), 11);
+
+		for (IStudent student : game.getPlayerTurn().getStudents()) {
+			game.getState().inputCommand("place " + student.getId() + " BBL", game);
+		}
+		
+		// tests if all students are on "BBL" area
+		assertEquals(game.getAreaById("BBL").getOccupyingStudents().size(), 26);
+		
+		for (int i = 0; i < 5; i++) {
+			game.getState().inputCommand("place " + game.getPlayerTurn().getStudents().get(i).getId() + " " + game.getAreas().get(i).getId(), game);
+		}
+		
+		// tests if students were moved from "BBL" area
+		assertEquals(game.getAreaById("BBL").getOccupyingStudents().size(), 22);
 	}
 }

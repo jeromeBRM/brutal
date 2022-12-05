@@ -31,9 +31,13 @@ public interface IGame {
 	
 	public boolean isStudentBelongingToPlayer(IStudent student, Player player);
 	
-	public Set<Area> getAreas();
+	public List<Area> getAreas();
+	
+	public Area getAreaById(String id);
 	
 	public Area getAreaByName(String name);
+	
+	public Area getAreaByStudent(IStudent student);
 	
 	public Player getAreaOwner(Area area);
 	

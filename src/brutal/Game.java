@@ -10,7 +10,7 @@ public class Game implements IGame {
 	private IState state;
 	private List<Player> players;
 	private Player playerTurn;
-	private Set<Area> areas;
+	private List<Area> areas;
 	
 	public Game() {
 		this.initialize();
@@ -22,12 +22,12 @@ public class Game implements IGame {
 		
 		this.players = new LinkedList<Player>();
 		
-		this.areas = new HashSet<Area>();
-		this.areas.add(new Area("Bibliothèque"));
-		this.areas.add(new Area("Bureau des étudiants"));
-		this.areas.add(new Area("Quartier administratif"));
-		this.areas.add(new Area("Halles industrielles"));
-		this.areas.add(new Area("Halle sportive"));
+		this.areas = new LinkedList<Area>();
+		this.areas.add(new Area("BBL", "Bibliothèque"));
+		this.areas.add(new Area("BDE", "Bureau des étudiants"));
+		this.areas.add(new Area("QAD", "Quartier administratif"));
+		this.areas.add(new Area("HID", "Halles industrielles"));
+		this.areas.add(new Area("HSP", "Halle sportive"));
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class Game implements IGame {
 
 	@Override
 	public void createStudent(Player player, int strength, int dexterity, int resilience, int constitution, int initiative) {
-
+		
 	}
 
 	@Override
@@ -99,6 +99,7 @@ public class Game implements IGame {
 	@Override
 	public void switchPlayerTurn() {
 		Collections.rotate(Game.getInstance().getPlayers(), 1);
+		System.out.println("switched player turn to " + this.getPlayerTurn().getProgram());
 	}
 
 	@Override
@@ -108,8 +109,21 @@ public class Game implements IGame {
 	}
 
 	@Override
-	public Set<Area> getAreas() {
+	public List<Area> getAreas() {
 		return this.areas;
+	}
+	
+	@Override
+	public Area getAreaById(String id) {
+		Area area = null;
+
+		for (Area a : this.getAreas()) {
+			if (a.getId().equals(id)) {
+				area = a;
+			}
+		}
+		
+		return area;
 	}
 
 	@Override
@@ -117,7 +131,20 @@ public class Game implements IGame {
 		Area area = null;
 
 		for (Area a : this.getAreas()) {
-			if (a.getName() == name) {
+			if (a.getName().equals(name)) {
+				area = a;
+			}
+		}
+		
+		return area;
+	}
+	
+	@Override
+	public Area getAreaByStudent(IStudent student) {
+		Area area = null;
+
+		for (Area a : this.getAreas()) {
+			if (a.getOccupyingStudents().contains(student)) {
 				area = a;
 			}
 		}
@@ -136,7 +163,7 @@ public class Game implements IGame {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public static synchronized IGame getInstance() {
 		if (Game.game == null) {
 			Game.game = new Game();
