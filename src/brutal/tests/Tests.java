@@ -92,7 +92,7 @@ class Tests {
 		
 		// tests elite student attributes boost
 		IStudent elite = game.getPlayerTurn().getStudentById("ETU2", game.getPlayerTurn().getAllStudents());
-		assertEquals(elite.getEcts(), 30);
+		assertEquals(elite.getEcts(), 39);
 		assertEquals(elite.getDexterity(), 5);
 		assertEquals(elite.getDexterity(), 5);
 		assertEquals(elite.getResilience(), 5);
@@ -109,7 +109,7 @@ class Tests {
 		
 		// tests master student attributes boost
 		IStudent master = game.getPlayerTurn().getStudentById("ETU8", game.getPlayerTurn().getAllStudents());
-		assertEquals(master.getEcts(), 30);
+		assertEquals(master.getEcts(), 44);
 		assertEquals(master.getDexterity(), 6);
 		assertEquals(master.getDexterity(), 6);
 		assertEquals(master.getResilience(), 6);
@@ -183,5 +183,19 @@ class Tests {
 		
 		// tests if students were moved from "BBL" area
 		assertEquals(game.getAreaById("BBL").getOccupyingStudents().size(), 22);
+		
+		/*
+		 * battle state tests
+		 */
+		
+		// tests if total ects on area "BBL" is lower than 660 and greater than 0
+		assertTrue(game.getAreaById("BBL").getTotalEcts() > 0);
+		
+		/*
+		 * truce state tests
+		 */
+		
+		// tests if game state updated to battle state
+		assertTrue(game.getState() instanceof TruceState);
 	}
 }

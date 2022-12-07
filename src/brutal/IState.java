@@ -6,4 +6,6 @@ public interface IState {
 	public void executeCommandLine(String[] tokens, IGame game);
 	
 	public void inputCommand(String command, IGame game);
+	
+	public void start(IGame game);
 }

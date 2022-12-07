@@ -66,7 +66,6 @@ public class Area {
 		for (IStudent student : this.getOccupyingStudents()) {
 			total += student.getEcts();
 		}
-		
 		return total;
 	}
 	
@@ -76,5 +75,52 @@ public class Area {
 	
 	public void removeStudent(IStudent student) {
 		this.getOccupyingStudents().remove(student);
+	}
+
+	public boolean isControlled(IGame game) {
+		Player occupyingPlayer = null;
+		for (IStudent student : this.getOccupyingStudents()) {
+			if (student.getEcts() > 0) {
+				occupyingPlayer = student.getOwner(game);
+			}
+		}
+		for (IStudent student : this.getOccupyingStudents()) {
+			if (student.getOwner(game) != occupyingPlayer && student.getEcts() > 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public Player playerInControl(IGame game) {
+		Player occupyingPlayer = null;
+		if (!this.isControlled(game)) {
+			return occupyingPlayer;
+		}
+		for (IStudent student : this.getOccupyingStudents()) {
+			if (student.getEcts() > 0) {
+				occupyingPlayer = student.getOwner(game);
+			}
+		}
+		return occupyingPlayer;
+	}
+	
+	public boolean isControlledByPlayer(Player player, IGame game) {
+		Player occupyingPlayer = player;
+		for (IStudent student : this.getOccupyingStudents()) {
+			if (student.getOwner(game) != occupyingPlayer && student.getEcts() > 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		String area = this.getId() + "\n";
+		for (IStudent student : this.getOccupyingStudents()) {
+			area += student.getId() + " (" + student.getEcts() + ")\n";
+		}
+		return area;
 	}
 }

@@ -27,4 +27,8 @@ public abstract class State implements IState {
 	}
 
 	protected abstract IState getNextState(IGame game);
+	
+	public void start(IGame game) {
+		return;
+	}
 }

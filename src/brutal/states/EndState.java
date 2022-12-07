@@ -1,7 +1,6 @@
 package brutal.states;
 
-import brutal.IGame;
-import brutal.IState;
+import brutal.*;
 
 public class EndState extends State {
 
@@ -17,7 +16,6 @@ public class EndState extends State {
 
 	@Override
 	protected IState getNextState(IGame game) {
-		// TODO Auto-generated method stub
-		return null;
+		return new StartState(game);
 	}
 }

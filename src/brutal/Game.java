@@ -33,6 +33,7 @@ public class Game implements IGame {
 	@Override
 	public void setState(IState state) {
 		this.state = state;
+		state.start(this);
 	}
 
 	@Override

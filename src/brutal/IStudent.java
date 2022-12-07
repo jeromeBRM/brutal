@@ -48,4 +48,6 @@ public interface IStudent {
 	public IStudent setElite();
 	
 	public IStudent setMaster();
+
+	public Player getOwner(IGame game);
 }

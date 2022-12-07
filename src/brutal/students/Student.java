@@ -1,9 +1,6 @@
 package brutal.students;
 
-import brutal.Area;
-import brutal.IGame;
-import brutal.IStrategy;
-import brutal.IStudent;
+import brutal.*;
 
 public class Student implements IStudent {
 
@@ -60,8 +57,14 @@ public class Student implements IStudent {
 	
 	@Override
 	public void setEcts(int ects) {
-		if (ects >= Student.MAX_HEALTH_ATTRIBUTE) {
-			this.ects = Student.MAX_HEALTH_ATTRIBUTE;		
+		if (ects >= Student.MAX_HEALTH_ATTRIBUTE + this.getConstitution()) {
+			this.ects = Student.MAX_HEALTH_ATTRIBUTE + this.getConstitution();		
+		}
+		else if (ects <= 0) {
+			this.ects = 0;
+		}
+		else {
+			this.ects = ects;
 		}
 	}
 
@@ -98,8 +101,9 @@ public class Student implements IStudent {
 	public void setConstitution(int constitution) {
 		this.constitution = constitution;
 		if (constitution >= Student.MAX_HEALTH_ATTRIBUTE) {
-			this.constitution = Student.MAX_HEALTH_ATTRIBUTE;	
+			this.constitution = Student.MAX_HEALTH_ATTRIBUTE;
 		}
+		this.heal(this.getConstitution());
 	}
 
 	@Override
@@ -176,5 +180,16 @@ public class Student implements IStudent {
 		student.setAttributes(this.strength, this.dexterity, this.resilience, this.constitution, this.initiative);
 		student.setStrategy(this.strategy);
 		return student;
+	}
+
+	@Override
+	public Player getOwner(IGame game) {
+		Player owner = null;
+		for (Player player : game.getPlayers()) {
+			if (player.getAllStudents().contains(this)) {
+				owner = player;
+			}
+		}
+		return owner;
 	}
 }

@@ -151,4 +151,9 @@ public class Player {
 		}
 		this.getStudentById(id, this.getAllStudents()).setStrategy(strategy);
 	}
+	
+	@Override
+	public String toString() {
+		return this.getProgram().toString();
+	}
 }

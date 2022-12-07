@@ -20,4 +20,9 @@ public class TruceState extends State {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "truce state";
+	}
 }
