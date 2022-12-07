@@ -1,5 +1,6 @@
 package brutal;
 import brutal.states.*;
+import brutal.students.Student;
 
 import java.util.*;
 
@@ -13,13 +14,12 @@ public class Game implements IGame {
 	private List<Area> areas;
 	
 	public Game() {
-		this.initialize();
+		this.setState(new StartState(this));
 	}
 
 	@Override
 	public void initialize() {
-		this.setState(new StartState(this));
-		
+		Student.resetCounter();
 		this.players = new LinkedList<Player>();
 		
 		this.areas = new LinkedList<Area>();
@@ -43,8 +43,6 @@ public class Game implements IGame {
 				return;
 		}
 		this.players.add(new Player(program));
-		
-		this.getState().updateGameState(Game.getInstance());
 	}
 
 	@Override

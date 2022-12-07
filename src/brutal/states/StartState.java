@@ -2,6 +2,7 @@ package brutal.states;
 
 import brutal.IGame;
 import brutal.IState;
+import brutal.Program;
 
 public class StartState extends State {
 
@@ -9,11 +10,14 @@ public class StartState extends State {
 	
 	public StartState(IGame game) {
 		super(game);
+		game.initialize();
 	}
 
 	@Override
 	public void executeCommandLine(String[] tokens, IGame game) {
-		
+		if (Program.valueOf(tokens[0]) != null) {
+			game.createPlayer(Program.valueOf(tokens[0]));
+		}
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import brutal.*;
 
 public class BattleState extends State {
 
+	private static final int AREAS_TO_CONTROL = 3;
+	
 	public BattleState(IGame game) {
 		super(game);
 	}
@@ -35,7 +37,9 @@ public class BattleState extends State {
 			Area area = (Area) iterator.next();
 			for (Iterator<IStudent> iterator2 = area.getStudentsByInitiative().descendingIterator(); iterator2.hasNext();) {	
 				IStudent student = (IStudent) iterator2.next();
-				student.useStrategy(area, game);
+				if (student.getEcts() > 0) {
+					student.useStrategy(area, game);	
+				}
 				if (area.isControlled(game)) {
 					System.out.println(area.getId() + " is controlled by " + area.playerInControl(game));
 					super.updateGameState(game);
@@ -56,7 +60,7 @@ public class BattleState extends State {
 					controlledAreas++;
 				}
 			}
-			if (controlledAreas == game.getAreas().size()) {
+			if (controlledAreas >= BattleState.AREAS_TO_CONTROL) {
 				return true;
 			}
 		}

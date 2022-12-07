@@ -60,6 +60,17 @@ public class Area {
 		return numberOfStudents;
 	}
 	
+	public int numberOfActiveStudentsOnArea(Player player) {
+		int numberOfStudents = 0;
+		for (Iterator<IStudent> iterator = this.getOccupyingStudents().iterator(); iterator.hasNext();) {	
+			IStudent student = (IStudent) iterator.next();
+			if (player.getAllStudents().contains(student) && student.getEcts() > 0) {
+				numberOfStudents++;
+			}
+		}
+		return numberOfStudents;
+	}
+	
 	public int getTotalEcts() {
 		int total = 0;
 		

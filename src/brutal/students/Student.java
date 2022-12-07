@@ -25,6 +25,10 @@ public class Student implements IStudent {
 		this.setAttributes(0, 0, 0, 0, 0);
 	}
 	
+	public static void resetCounter() {
+		Student.studentCount = 0;
+	}
+	
 	@Override
 	public String getId() {
 		return "ETU" + this.id;

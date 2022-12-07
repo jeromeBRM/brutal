@@ -26,12 +26,12 @@ class Tests {
 		assertTrue(game.getAreaByName("Bibliothèque") != null);
 
 		// creates players
-		game.createPlayer(Program.ISI);
-		game.createPlayer(Program.RT);
+		game.getState().inputCommand("ISI", game);
+		game.getState().inputCommand("ISI", game);
+		game.getState().inputCommand("RT", game);
 	
-		// tests if program cannot be created twice
-		game.createPlayer(Program.ISI);
-		assertFalse(game.getPlayers().size() == 3);
+		// tests if player "ISI" is not created twice
+		assertEquals(game.getPlayers().size(), 2);
 		
 		/*
 		 * setup state tests
@@ -195,7 +195,38 @@ class Tests {
 		 * truce state tests
 		 */
 		
-		// tests if game state updated to battle state
-		assertTrue(game.getState() instanceof TruceState);
+		// tests if game state updated to truce state
+		//assertTrue(game.getState() instanceof TruceState);
+		
+		int countOnBBL = game.getAreaById("BBL").getOccupyingStudents().size();
+		
+		game.getState().inputCommand("deploy ETU0 BBL", game);
+		game.getState().inputCommand("deploy ETU0 BBL", game);
+		game.getState().inputCommand("deploy ETU1 BBL", game);
+		game.getState().inputCommand("deploy ETU9 BBL", game);
+		game.getState().inputCommand("deploy ETU20 BBL", game);
+		
+		game.getState().inputCommand("change", game);
+
+		game.getState().inputCommand("deploy ETU2 BBL", game);
+		game.getState().inputCommand("deploy ETU20 BBL", game);
+		game.getState().inputCommand("deploy ETU21 BBL", game);
+		game.getState().inputCommand("deploy ETU22 BBL", game);
+		game.getState().inputCommand("deploy ETU23 BBL", game);
+		game.getState().inputCommand("deploy ETU24 BBL", game);
+		
+		// tests if students ETU0 and ETU1 have been deployed on BBL
+		assertEquals(game.getAreaById("BBL").getOccupyingStudents().size(), countOnBBL + 7);
+		
+		game.getState().inputCommand("confirm", game);
+		
+		/*
+		 * end state tests
+
+		
+		// tests if game state updated to end state
+		assertTrue(game.getState() instanceof EndState);
+		
+		game.getState().inputCommand("restart", game);		 */
 	}
 }
