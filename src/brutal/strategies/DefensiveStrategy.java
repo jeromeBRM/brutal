@@ -10,18 +10,20 @@ import brutal.IStudent;
 public class DefensiveStrategy extends Strategy {
 
 	@Override
-	public void use(IStudent origin, Area area, IGame game) {
+	public boolean use(IStudent origin, Area area, IGame game) {
 		IStudent target = this.target(origin, area, game);
 		if (target == null) {
-			return;
+			return false;
 		}
 		int random = Math.abs(new Random().nextInt() % 100);
 		if (random <= (20 + 6 * origin.getDexterity())) {
 			if (target != null) {
 				int ects = this.ects(origin, target);
 				target.heal(ects);
+				return true;
 			}
 		}
+		return false;
 	}
 	
 	@Override

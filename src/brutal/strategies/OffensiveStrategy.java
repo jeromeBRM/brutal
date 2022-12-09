@@ -9,17 +9,19 @@ import brutal.IStudent;
 public class OffensiveStrategy extends Strategy {
 
 	@Override
-	public void use(IStudent origin, Area area, IGame game) {
+	public boolean use(IStudent origin, Area area, IGame game) {
 		IStudent target = this.target(origin, area, game);
 		if (target == null) {
-			return;
+			return false;
 		}
 		int random = Math.abs(new Random().nextInt() % 100);
 		if (random <= (40 + 3 * origin.getDexterity())) {
 			int damage = this.damagePoints(origin, target);
 			
 			target.damage(damage);
+			return true;
 		}
+		return false;
 	}
 
 	@Override

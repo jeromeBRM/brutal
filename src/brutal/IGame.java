@@ -38,10 +38,8 @@ public interface IGame {
 	public Area getAreaByName(String name);
 	
 	public Area getAreaByStudent(IStudent student);
-	
-	public Player getAreaOwner(Area area);
-	
-	public Player getWinner();
 
 	public void setPlayerTurn(Player player);
+	
+	public String toString();
 }

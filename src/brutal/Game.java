@@ -151,18 +151,6 @@ public class Game implements IGame {
 		return area;
 	}
 
-	@Override
-	public Player getAreaOwner(Area area) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Player getWinner() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public static synchronized IGame getInstance() {
 		if (Game.game == null) {
 			Game.game = new Game();
@@ -173,5 +161,50 @@ public class Game implements IGame {
 	@Override
 	public void setPlayerTurn(Player player) {
 		this.playerTurn = player;
+	}
+	
+	@Override
+	public String toString() {
+		String g = "\n";
+		for (Iterator<Area> iterator = this.getAreas().iterator(); iterator.hasNext();) {	
+			Area area = (Area) iterator.next();
+			g += "| " + area.getName() + " " + "-".repeat(26 - area.getName().length()) + " ";
+		}
+		g += "|\n";
+		for (int i = 0; i < this.getMaxStudentsOnArea(); i++) {
+			for (int j = 0; j < this.getAreas().size(); j++) {
+				if (this.getAreas().get(j).getOccupyingStudents().size() > i && this.getAreas().get(j).getOccupyingStudents().get(i).getEcts() > 0) {
+					String st = this.getAreas().get(j).getOccupyingStudents().get(i).getId() + " (" +
+						this.getAreas().get(j).getOccupyingStudents().get(i).getEcts() + ")";
+					g += "| " + st + " ".repeat(26 - st.length()) + "  ";
+				}
+				else {
+					String st = "-";
+					g += "| " + st + " ".repeat(26 - st.length()) + "  ";
+				}
+			}
+			g += "|\n";
+		}
+		g += "\n";
+		for (Iterator<Area> iterator = this.getAreas().iterator(); iterator.hasNext();) {	
+			Area area = (Area) iterator.next();
+			if (area.playerInControl(this) != null)
+				g += "  Controlled by " + area.playerInControl(this) + " " + " ".repeat(26 - ("Controlled by " + area.playerInControl(this).getProgram().toString()).length()) + " ";
+			else
+				g += "   " + " ".repeat(26 - " ".length()) + "  ";
+		}
+		g += " \n";
+		return g;
+	}
+	
+	private int getMaxStudentsOnArea() {
+		int max = 0;
+		for (Iterator<Area> iterator = this.getAreas().iterator(); iterator.hasNext();) {	
+			Area area = (Area) iterator.next();
+			if (area.getOccupyingStudents().size() > max) {
+				max = area.getOccupyingStudents().size();
+			}
+		}
+		return max;
 	}
 }

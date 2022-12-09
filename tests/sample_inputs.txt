@@ -1,0 +1,147 @@
+ISI
+RT
+
+points ETU0 4 4 4 4 4
+points ETU1 4 4 4 4 4
+points ETU2 4 4 4 4 4
+points ETU3 4 4 4 4 4
+points ETU4 4 4 4 4 4
+points ETU5 4 4 4 4 4
+points ETU6 4 4 4 4 4
+points ETU7 4 4 4 4 4
+points ETU8 4 4 4 4 4
+points ETU9 4 4 4 4 4
+points ETU10 4 4 4 4 4
+points ETU11 4 4 4 4 4
+points ETU12 4 4 4 4 4
+points ETU13 4 4 4 4 4
+points ETU14 4 4 4 4 4
+points ETU15 4 4 4 4 4
+points ETU16 4 4 4 4 4
+points ETU17 4 4 4 4 4
+points ETU18 4 4 4 4 4
+points ETU19 4 4 4 4 4
+strategy ETU0 random
+strategy ETU1 random
+strategy ETU2 random
+strategy ETU3 random
+strategy ETU4 random
+strategy ETU5 random
+strategy ETU6 random
+strategy ETU7 random
+strategy ETU8 random
+strategy ETU9 random
+strategy ETU10 random
+strategy ETU11 random
+strategy ETU12 random
+strategy ETU13 random
+strategy ETU14 random
+strategy ETU15 random
+strategy ETU16 random
+strategy ETU17 random
+strategy ETU18 random
+strategy ETU19 random
+reservist ETU0
+reservist ETU1
+reservist ETU2
+reservist ETU3
+reservist ETU4
+elite ETU0
+elite ETU1
+elite ETU2
+elite ETU3
+master ETU4
+
+points ETU20 4 4 4 4 4
+points ETU21 4 4 4 4 4
+points ETU22 4 4 4 4 4
+points ETU23 4 4 4 4 4
+points ETU24 4 4 4 4 4
+points ETU25 4 4 4 4 4
+points ETU26 4 4 4 4 4
+points ETU27 4 4 4 4 4
+points ETU28 4 4 4 4 4
+points ETU29 4 4 4 4 4
+points ETU30 4 4 4 4 4
+points ETU31 4 4 4 4 4
+points ETU32 4 4 4 4 4
+points ETU33 4 4 4 4 4
+points ETU34 4 4 4 4 4
+points ETU35 4 4 4 4 4
+points ETU36 4 4 4 4 4
+points ETU37 4 4 4 4 4
+points ETU38 4 4 4 4 4
+points ETU39 4 4 4 4 4
+strategy ETU20 random
+strategy ETU21 random
+strategy ETU22 random
+strategy ETU23 random
+strategy ETU24 random
+strategy ETU25 random
+strategy ETU26 random
+strategy ETU27 random
+strategy ETU28 random
+strategy ETU29 random
+strategy ETU30 random
+strategy ETU31 random
+strategy ETU32 random
+strategy ETU33 random
+strategy ETU34 random
+strategy ETU35 random
+strategy ETU36 random
+strategy ETU37 random
+strategy ETU38 random
+strategy ETU39 random
+reservist ETU20
+reservist ETU21
+reservist ETU22
+reservist ETU23
+reservist ETU24
+elite ETU20
+elite ETU21
+elite ETU22
+elite ETU23
+master ETU24
+
+place ETU0 BBL
+place ETU1 BDE
+place ETU2 QAD
+place ETU3 HID
+place ETU4 HSP
+place ETU5 BBL
+place ETU6 BDE
+place ETU7 QAD
+place ETU8 HID
+place ETU9 HSP
+place ETU10 BBL
+place ETU11 BDE
+place ETU12 QAD
+place ETU13 HID
+place ETU14 HSP
+place ETU15 BBL
+place ETU16 BDE
+place ETU17 QAD
+place ETU18 HID
+place ETU19 HSP
+
+place ETU20 BBL
+place ETU21 BDE
+place ETU22 QAD
+place ETU23 HID
+place ETU24 HSP
+place ETU25 BBL
+place ETU26 BDE
+place ETU27 QAD
+place ETU28 HID
+place ETU29 HSP
+place ETU30 BBL
+place ETU31 BDE
+place ETU32 QAD
+place ETU33 HID
+place ETU34 HSP
+place ETU35 BBL
+place ETU36 BDE
+place ETU37 QAD
+place ETU38 HID
+place ETU39 HSP
+

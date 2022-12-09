@@ -30,7 +30,7 @@ public class BattleState extends State {
 			return new TruceState(game);
 		}
 	}
-	
+
 	private void battle(IGame game) {
 		System.out.println("students are battling...");
 		for (Iterator<Area> iterator = game.getAreas().iterator(); iterator.hasNext();) {	
@@ -38,15 +38,19 @@ public class BattleState extends State {
 			for (Iterator<IStudent> iterator2 = area.getStudentsByInitiative().descendingIterator(); iterator2.hasNext();) {	
 				IStudent student = (IStudent) iterator2.next();
 				if (student.getEcts() > 0) {
-					student.useStrategy(area, game);	
-				}
-				if (area.isControlled(game)) {
-					System.out.println(area.getId() + " is controlled by " + area.playerInControl(game));
-					super.updateGameState(game);
-					return;
+					if (!area.isControlled(game)) {
+						boolean strategyUsed = student.useStrategy(area, game);
+						if (area.isControlled(game)) {
+							System.out.println(game);
+							System.out.println(area.getId() + " is controlled by " + area.playerInControl(game));
+							super.updateGameState(game);
+							return;
+						}
+					}
 				}
 			}
 		}
+		System.out.println(game);
 		this.battle(game);
 	}
 	

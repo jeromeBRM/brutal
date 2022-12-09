@@ -42,6 +42,7 @@ public class TruceState extends State {
 			}
 			game.getAreaById(areaId).addStudent(reservist);
 		}
+		System.out.println(game);
 	}
 	
 	private void redeployStudent(IGame game, String studentId, String areaId, String newStrategy){
@@ -61,6 +62,7 @@ public class TruceState extends State {
 		if (newStrategy != null) {
 			student.getOwner(game).setStrategyToStudent(student.getId(), newStrategy);
 		}
+		System.out.println(game);
 	}
 
 	@Override

@@ -9,7 +9,7 @@ public interface IStudent {
 	
 	public void addAttributes(int strength, int dexterity, int resilience, int constitution, int initiative);
 	
-	public void useStrategy(Area area, IGame game);
+	public boolean useStrategy(Area area, IGame game);
 	
 	public void setStrategy(IStrategy strategy);
 	

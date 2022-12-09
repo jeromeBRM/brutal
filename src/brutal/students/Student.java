@@ -55,8 +55,8 @@ public class Student implements IStudent {
 	}
 	
 	@Override
-	public void useStrategy(Area area, IGame game) {
-		this.getStrategy().use(this, area, game);
+	public boolean useStrategy(Area area, IGame game) {
+		return this.getStrategy().use(this, area, game);
 	}
 	
 	@Override
