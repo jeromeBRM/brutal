@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.*;
 
-import brutal.*;
-import brutal.states.*;
+import brutal.model.core.*;
+import brutal.model.states.*;
 
 class Tests {
 	
