@@ -12,6 +12,7 @@ public abstract class State implements IState {
 	@Override
 	public void updateGameState(IGame game) {
 		game.setState(this.getNextState(game));
+		game.notifyView();
 	}
 	
 	@Override

@@ -2,6 +2,8 @@ package brutal.model.core;
 
 import java.util.*;
 
+import brutal.view.GUI;
+
 public interface IGame {
 	public void initialize();
 	
@@ -40,6 +42,10 @@ public interface IGame {
 	public Area getAreaByStudent(IStudent student);
 
 	public void setPlayerTurn(Player player);
+	
+	public void addView(GUI gui);
+	
+	public void notifyView();
 	
 	public String toString();
 }

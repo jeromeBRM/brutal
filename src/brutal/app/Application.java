@@ -30,7 +30,8 @@ public class Application {
 		Runnable gui = new Runnable() {
 			public void run() {
 				try {
-					GUI gui = new GUI();
+					GUI gui = new GUI(game);
+					game.addView(gui);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

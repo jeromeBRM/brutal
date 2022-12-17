@@ -1,6 +1,7 @@
 package brutal.model.core;
 import brutal.model.states.*;
 import brutal.model.students.Student;
+import brutal.view.GUI;
 
 import java.util.*;
 
@@ -12,6 +13,8 @@ public class Game implements IGame {
 	private List<Player> players;
 	private Player playerTurn;
 	private List<Area> areas;
+	
+	private GUI gui;
 	
 	public Game() {
 		this.setState(new StartState(this));
@@ -206,5 +209,16 @@ public class Game implements IGame {
 			}
 		}
 		return max;
+	}
+
+	@Override
+	public void notifyView() {
+		this.gui.update();
+	}
+
+	@Override
+	public void addView(GUI gui) {
+		this.gui = gui;
+		this.notifyView();
 	}
 }
