@@ -42,4 +42,9 @@ public class DefensiveStrategy extends Strategy {
 		float random = Math.abs(new Random().nextInt() % 60) / 100.0f;
 		return (int) (random * (10 + target.getConstitution()));
 	}
+	
+	@Override
+	public String toString() {
+		return "defensive";
+	}
 }

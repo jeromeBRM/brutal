@@ -167,40 +167,31 @@ public class Game implements IGame {
 	}
 	
 	@Override
-	public String toString() {
-		String g = "\n";
-		for (Iterator<Area> iterator = this.getAreas().iterator(); iterator.hasNext();) {	
-			Area area = (Area) iterator.next();
-			g += "| " + area.getName() + " " + "-".repeat(26 - area.getName().length()) + " ";
-		}
-		g += "|\n";
-		for (int i = 0; i < this.getMaxStudentsOnArea(); i++) {
-			for (int j = 0; j < this.getAreas().size(); j++) {
-				if (this.getAreas().get(j).getOccupyingStudents().size() > i && this.getAreas().get(j).getOccupyingStudents().get(i).getEcts() > 0) {
-					String st = this.getAreas().get(j).getOccupyingStudents().get(i).getId() + " (" +
-						this.getAreas().get(j).getOccupyingStudents().get(i).getEcts() + ")";
-					g += "| " + st + " ".repeat(26 - st.length()) + "  ";
-				}
-				else {
-					String st = "-";
-					g += "| " + st + " ".repeat(26 - st.length()) + "  ";
+	public Player getWinner() {
+		Player winner = null;
+		for (Iterator<Player> iterator = game.getPlayers().iterator(); iterator.hasNext();) {	
+			Player player = (Player) iterator.next();
+			int controlledAreas = 0;
+			for (Iterator<Area> iterator2 = game.getAreas().iterator(); iterator2.hasNext();) {	
+				Area area = (Area) iterator2.next();
+				if (area.isControlledByPlayer(player, game)) {
+					controlledAreas++;
 				}
 			}
-			g += "|\n";
+			if (controlledAreas >= EndState.AREAS_TO_CONTROL) {
+				winner = player;
+			}
 		}
-		g += "\n";
-		for (Iterator<Area> iterator = this.getAreas().iterator(); iterator.hasNext();) {	
-			Area area = (Area) iterator.next();
-			if (area.playerInControl(this) != null)
-				g += "  Controlled by " + area.playerInControl(this) + " " + " ".repeat(26 - ("Controlled by " + area.playerInControl(this).getProgram().toString()).length()) + " ";
-			else
-				g += "   " + " ".repeat(26 - " ".length()) + "  ";
-		}
-		g += " \n";
+		return winner;
+	}
+	
+	@Override
+	public String toString() {
+		String g = "game is in " + this.game.getState().toString();
 		return g;
 	}
 	
-	private int getMaxStudentsOnArea() {
+	public int getMaxStudentsOnArea() {
 		int max = 0;
 		for (Iterator<Area> iterator = this.getAreas().iterator(); iterator.hasNext();) {	
 			Area area = (Area) iterator.next();

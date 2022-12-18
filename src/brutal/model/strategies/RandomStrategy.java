@@ -23,4 +23,9 @@ public class RandomStrategy extends Strategy  {
 	protected IStudent target(IStudent origin, Area area, IGame game) {
 		return origin;
 	}
+	
+	@Override
+	public String toString() {
+		return "random";
+	}
 }

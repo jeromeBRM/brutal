@@ -45,4 +45,9 @@ public class OffensiveStrategy extends Strategy {
 		float mul = Math.max(0, Math.min(100, 10 * origin.getStrength() - 5 * target.getResilience()));
 		return mul * 0.1f;
 	}
+	
+	@Override
+	public String toString() {
+		return "offensive";
+	}
 }

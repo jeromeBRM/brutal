@@ -1,12 +1,10 @@
 package brutal.model.states;
 
-import java.util.Iterator;
-
 import brutal.model.core.*;
 
 public class EndState extends State {
 
-	private static final int AREAS_TO_CONTROL = 3;
+	public static final int AREAS_TO_CONTROL = 3;
 	
 	private boolean confirmed;
 	
@@ -17,7 +15,7 @@ public class EndState extends State {
 	
 	@Override
 	public void start(IGame game) {
-		System.out.println("player " + this.getWinner(game).getProgram().toString() + " wins the game!");
+		System.out.println("player " + game.getWinner().getProgram().toString() + " wins the game!");
 	}
 
 	@Override
@@ -37,24 +35,6 @@ public class EndState extends State {
 		else {
 			return game.getState();
 		}
-	}
-	
-	private Player getWinner(IGame game) {
-		Player winner = null;
-		for (Iterator<Player> iterator = game.getPlayers().iterator(); iterator.hasNext();) {	
-			Player player = (Player) iterator.next();
-			int controlledAreas = 0;
-			for (Iterator<Area> iterator2 = game.getAreas().iterator(); iterator2.hasNext();) {	
-				Area area = (Area) iterator2.next();
-				if (area.isControlledByPlayer(player, game)) {
-					controlledAreas++;
-				}
-			}
-			if (controlledAreas >= EndState.AREAS_TO_CONTROL) {
-				winner = player;
-			}
-		}
-		return winner;
 	}
 
 	@Override

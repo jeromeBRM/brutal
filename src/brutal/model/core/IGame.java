@@ -27,6 +27,8 @@ public interface IGame {
 	
 	public List<Player> getPlayers();
 	
+	public Player getWinner();
+	
 	public Player getPlayerTurn();
 	
 	public void switchPlayerTurn();
