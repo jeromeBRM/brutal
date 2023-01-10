@@ -220,14 +220,5 @@ class Tests {
 		assertEquals(game.getAreaById("BBL").getOccupyingStudents().size(), countOnBBL + 7);
 		
 		game.getState().inputCommand("confirm", game);
-		
-		/*
-		 * end state tests
-
-		
-		// tests if game state updated to end state
-		assertTrue(game.getState() instanceof EndState);
-		
-		game.getState().inputCommand("restart", game);		 */
 	}
 }
